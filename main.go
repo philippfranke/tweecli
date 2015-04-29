@@ -204,7 +204,7 @@ func main() {
 		}()
 
 		u, _ := url.Parse("https://api.twitter.com/1.1/search/tweets.json")
-		var result result
+
 		for {
 			if stop {
 				return
@@ -244,6 +244,7 @@ func main() {
 			}
 
 			d := json.NewDecoder(resp.Body)
+			var result result
 			if err := d.Decode(&result); err == nil {
 				if len(result.Statuses) > 0 {
 					log.Printf("Collected %d tweets", len(result.Statuses))
